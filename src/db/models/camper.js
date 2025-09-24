@@ -14,6 +14,26 @@ const gallerySchema = new Schema(
   { _id: false },
 );
 
+const reviewSchema = new Schema(
+  {
+    reviewer_name: {
+      type: String,
+      required: true,
+    },
+    reviewer_rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+    },
+    comment: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+
 const camperSchema = new Schema(
   {
     name: {
@@ -73,12 +93,7 @@ const camperSchema = new Schema(
 
     gallery: [gallerySchema],
 
-    reviews: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Review',
-      },
-    ],
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,
