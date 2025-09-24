@@ -6,7 +6,11 @@ export const getCampersController = async (req, res, next) => {
 
     res.status(200).json({
       message: 'Successfully found campers!',
-      ...result,
+      data: result.campers,
+      total: result.totalCount,
+      page: result.page,
+      totalPages: result.totalPages,
+      hasMore: result.page < result.totalPages,
     });
   } catch (error) {
     next(error);
