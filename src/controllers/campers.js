@@ -2,10 +2,11 @@ import { getAllCampers, getCamperById } from '../services/campers.js';
 
 export const getCampersController = async (req, res, next) => {
   try {
-    const campers = await getAllCampers();
+    const result = await getAllCampers(req.query);
+
     res.status(200).json({
       message: 'Successfully found campers!',
-      data: campers,
+      ...result,
     });
   } catch (error) {
     next(error);
