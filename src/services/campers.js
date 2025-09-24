@@ -44,6 +44,11 @@ export const getAllCampers = async (filters) => {
 };
 
 export const getCamperById = async (camperId) => {
-  const camper = await CamperCollection.findById(camperId);
-  return camper;
+  const isValidObjectId = /^[0-9a-fA-F]{24}$/.test(camperId);
+
+  if (isValidObjectId) {
+    return await CamperCollection.findById(camperId);
+  } else {
+    return await CamperCollection.findOne({ id: camperId });
+  }
 };
